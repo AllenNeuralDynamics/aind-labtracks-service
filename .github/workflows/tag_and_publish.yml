@@ -140,6 +140,10 @@ jobs:
     needs: [bump_version, publish_server]
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.default_branch }}
+          fetch-depth: 0
+          token: ${{ secrets.SERVICE_TOKEN }}
       - name: Pull latest changes
         run: git pull origin main
       - name: Update version
