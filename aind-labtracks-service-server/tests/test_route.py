@@ -1,5 +1,7 @@
 """Test routes"""
 
+from unittest.mock import patch
+
 import pytest
 
 
@@ -13,19 +15,44 @@ class TestHealthcheckRoute:
         assert "OK" == response.json()["status"]
 
 
-class TestContentRoute:
-    """Test responses."""
+class TestSubjectRoute:
+    """Test subject responses."""
 
-    def test_get_200_response(self, client, mock_get_example_response):
+    def test_get_200_subject(
+        self, client, get_labtracks_session, test_labtracks_subject
+    ):
         """Tests a good response"""
-        response = client.get("/length")
+        response = client.get("/subject/632269")
         assert 200 == response.status_code
+        assert [
+            test_labtracks_subject.model_dump(mode="json")
+        ] == response.json()
 
-    def test_get_404_response(self, client, mock_get_empty_response):
-        """Tests an empty response"""
+    def test_get_404_subject(
+        self,
+        client,
+        get_labtracks_session,
+    ):
+        """Tests a missing data response"""
 
-        response = client.get("/raw")
+        response = client.get("/subject/0")
+        expected_response = {"detail": "Not found"}
         assert 404 == response.status_code
+        assert expected_response == response.json()
+
+    def test_500_internal_server_error(
+        self, client, get_labtracks_session, caplog
+    ):
+        """Tests an internal server error response"""
+
+        with patch(
+            "aind_labtracks_service_server.handler.SessionHandler"
+            ".get_subject_view",
+            side_effect=Exception("Something went wrong"),
+        ):
+            response = client.get("/subject/1234")
+
+        assert 500 == response.status_code
 
 
 if __name__ == "__main__":

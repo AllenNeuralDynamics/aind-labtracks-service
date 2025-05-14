@@ -11,16 +11,9 @@ class TestMain:
         response = client.get("/healthcheck")
         assert 200 == response.status_code
 
-    def test_get_length(self, client, mock_get_example_response):
-        """Tests content route length"""
-        response = client.get("/length")
-        expected_json = {"info": "1244", "arg": "length"}
-        assert expected_json == response.json()
-        assert 200 == response.status_code
-
-    def test_get_raw(self, client, mock_get_example_response):
-        """Tests content route length"""
-        response = client.get("/raw")
+    def test_get_subject(self, client, get_labtracks_session):
+        """Tests subject"""
+        response = client.get("/subject/632269")
         assert 200 == response.status_code
 
 
