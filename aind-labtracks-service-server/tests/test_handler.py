@@ -2,7 +2,7 @@
 
 import pytest
 
-from aind_service_template_server.handler import SessionHandler
+from aind_labtracks_service_server.handler import SessionHandler
 
 
 class TestHandler:
