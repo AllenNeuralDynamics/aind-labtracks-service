@@ -12,8 +12,13 @@ class TestSession:
         """Tests get_session method"""
 
         session = next(get_session())
-        base_url = session.base_url
-        assert "example" == base_url
+        bind_url = str(session.get_bind().url)
+        session.close()
+        expected_bind_url = (
+            "mssql+pyodbc://lb_user:***@lb_host:123/"
+            "lb_db?driver=FreeTDS&tds_version=8.0"
+        )
+        assert expected_bind_url == bind_url
 
 
 if __name__ == "__main__":

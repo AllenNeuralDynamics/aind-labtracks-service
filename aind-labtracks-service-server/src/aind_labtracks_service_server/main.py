@@ -10,14 +10,13 @@ from fastapi.routing import APIRoute
 from aind_labtracks_service_server import __version__ as service_version
 from aind_labtracks_service_server.route import router
 
-# The log level can be set by adding an environment variable before launch.
 log_level = os.getenv("LOG_LEVEL", "INFO")
 logging.basicConfig(level=log_level)
 
 description = """
-## aind-service-template
+## aind-labtracks-service-server
 
-Service to pull data from example backend.
+Service to fetch data from LabTracks.
 
 """
 
@@ -25,7 +24,7 @@ Service to pull data from example backend.
 app = FastAPI(
     title="aind-labtracks-service-server",
     description=description,
-    summary="Serves data from example backend.",
+    summary="Serves data from LabTracks.",
     version=service_version,
 )
 
