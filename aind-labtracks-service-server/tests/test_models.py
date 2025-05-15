@@ -10,6 +10,7 @@ from aind_labtracks_service_server.models import (
     SexNames,
     SpeciesNames,
     Subject,
+    Procedure,
 )
 
 
@@ -126,6 +127,54 @@ class TestSubject(unittest.TestCase):
             class_values=0,
         )
         self.assertEqual(Subject(id=123456), lab_tracks_subject)
+
+
+class TestProcedure(unittest.TestCase):
+    """Test validators in Procedure class"""
+
+    def test_parse_task_description(self):
+        raw = (
+            'Create cages in a \"Surgical Group\" in LT.'
+            ' Prep per LASWI-0021 Surgical Cage Preparation.\r\n\r\n    '
+            'Ear Notch and Tattoo Confirmation (__) Does cage need a change flag? (___)'
+            ' Entered into Post-operative observation sheet?  (__)'
+        )
+        expected = (
+            'Create cages in a "Surgical Group" in LT.'
+            ' Prep per LASWI-0021 Surgical Cage Preparation.'
+            ' Ear Notch and Tattoo Confirmation (__) Does cage need a change flag? (___)'
+            ' Entered into Post-operative observation sheet? (__)'
+        )
+        proc = Procedure(
+            id=1,
+            type_name="Test",
+            date_start=None,
+            date_end=None,
+            investigator_id=None,
+            task_name=None,
+            task_description=raw,
+            task_object=None,
+            protocol_number=None,
+            protocol_title=None,
+            task_status=None,
+        )
+        self.assertEqual(proc.task_description, expected)
+
+    def test_parse_task_description_none(self):
+        proc = Procedure(
+            id=1,
+            type_name="Test",
+            date_start=None,
+            date_end=None,
+            investigator_id=None,
+            task_name=None,
+            task_description=None,
+            task_object=None,
+            protocol_number=None,
+            protocol_title=None,
+            task_status=None,
+        )
+        self.assertIsNone(proc.task_description)
 
 
 if __name__ == "__main__":
