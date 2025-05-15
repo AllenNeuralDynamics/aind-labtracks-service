@@ -199,6 +199,172 @@ class AnimalsCommon(SQLModel, table=True):
     modified_by: Optional[Decimal] = Field(default=None, alias="Modified_By")
 
 
+class AcucProtocol(SQLModel, table=True):
+    """AcucProtocol Table schema auto generated from script"""
+
+    # Actual table name has an underscore
+    # noinspection SpellCheckingInspection
+    __tablename__ = "Acuc_Protocol"
+
+    id: Optional[Decimal] = Field(default=None, alias="ID")
+    link_index: Optional[Decimal] = Field(default=None, alias="link_index")
+    facility_id: Optional[Decimal] = Field(default=None, alias="Facility_ID")
+    is_external: Optional[str] = Field(default=None, alias="Is_External")
+    protocol_number: Optional[str] = Field(default=None, alias="protocol_number")
+    protocol_title: Optional[str] = Field(default=None, alias="protocol_title")
+    protocol_type: Optional[str] = Field(default=None, alias="protocol_type")
+    acuc_form_id: Optional[Decimal] = Field(default=None, alias="acuc_form_id")
+    protocol_stage: Optional[str] = Field(default=None, alias="protocol_stage")
+    atm_type: Optional[str] = Field(default=None, alias="atm_type")
+    atm_status: Optional[str] = Field(default=None, alias="atm_status")
+    submission_date: Optional[datetime] = Field(default=None, alias="submission_date")
+    approval_date: Optional[datetime] = Field(default=None, alias="approval_date")
+    expiration_date: Optional[datetime] = Field(default=None, alias="expiration_date")
+    triennial_date: Optional[datetime] = Field(default=None, alias="triennial_date")
+    review_completion_date: Optional[datetime] = Field(default=None, alias="review_completion_date")
+    species_id: Optional[Decimal] = Field(default=None, alias="species_id")
+    animal_sex_1: Optional[str] = Field(default=None, alias="animal_sex_1")
+    animal_strain_1: Optional[Decimal] = Field(default=None, alias="animal_strain_1")
+    animal_sex_2: Optional[str] = Field(default=None, alias="animal_sex_2")
+    animal_strain_2: Optional[Decimal] = Field(default=None, alias="animal_strain_2")
+    annual_use: Optional[Decimal] = Field(default=None, alias="annual_use")
+    usda_code: Optional[str] = Field(default=None, alias="usda_code")
+    investigator_index: Optional[Decimal] = Field(default=None, alias="investigator_index")
+    location: Optional[str] = Field(default=None, alias="location")
+    email_address: Optional[str] = Field(default=None, alias="email_address")
+    phone_number: Optional[str] = Field(default=None, alias="phone_number")
+    email_list_id: Optional[Decimal] = Field(default=None, alias="email_list_id")
+    study_monitor: Optional[str] = Field(default=None, alias="Study_Monitor")
+    study_document: Optional[str] = Field(default=None, alias="Study_Document")
+    order_note_sent: Optional[str] = Field(default=None, alias="Order_Note_Sent")
+    annual_note_sent: Optional[str] = Field(default=None, alias="Annual_Note_Sent")
+    triennial_note_sent: Optional[str] = Field(default=None, alias="Triennial_Note_Sent")
+    generation: Optional[Decimal] = Field(default=None, alias="Generation")
+    row_created: Optional[datetime] = Field(default=None, alias="Row_Created")
+    row_modified: Optional[datetime] = Field(default=None, alias="Row_Modified")
+    created_by: Optional[Decimal] = Field(default=None, alias="Created_By")
+    modified_by: Optional[Decimal] = Field(default=None, alias="Modified_By")
+    activation_date: Optional[datetime] = Field(default=None, alias="Activation_Date")
+    license_id: Optional[Decimal] = Field(default=None, alias="License_ID")
+    l19b_number: Optional[str] = Field(default=None, alias="L19B_Number")
+    record_version: Optional[Decimal] = Field(default=None, alias="Record_Version")
+    color_code: Optional[Decimal] = Field(default=None, alias="Color_Code")
+    agenda_date: Optional[datetime] = Field(default=None, alias="Agenda_Date")
+    description: Optional[str] = Field(default=None, alias="Description")
+    purpose_of_use: Optional[Decimal] = Field(default=None, alias="Purpose_Of_Use")
+    submission_number: Optional[str] = Field(default=None, alias="Submission_Number")
+    department_id: Optional[Decimal] = Field(default=None, alias="Department_ID")
+
+
+class TaskSet(SQLModel, table=True):
+    """TaskSet Table schema auto generated from script"""
+
+    # Actual table name has an underscore
+    # noinspection SpellCheckingInspection
+    __tablename__ = "Task_Set"
+
+    id: Optional[Decimal] = Field(default=None, alias="ID")
+    task_type_id: Optional[Decimal] = Field(default=None, alias="Task_Type_ID")
+    class_def_id: Optional[Decimal] = Field(default=None, alias="Class_Def_ID")
+    class_values: Optional[str] = Field(default=None, alias="Class_Values")
+    union_id: Optional[Decimal] = Field(default=None, alias="Union_ID")
+    acuc_link_id: Optional[Decimal] = Field(default=None, alias="ACUC_Link_ID")
+    task_name: Optional[str] = Field(default=None, alias="Task_Name")
+    task_number: Optional[str] = Field(default=None, alias="Task_Number")
+    rent_item_id: Optional[Decimal] = Field(default=None, alias="Rent_Item_ID")
+    price_total: Optional[Decimal] = Field(default=None, alias="Price_Total")
+    task_resource_id: Optional[Decimal] = Field(default=None, alias="Task_Resource_ID")
+    task_priority: Optional[Decimal] = Field(default=None, alias="Task_Priority")
+    accepted_by: Optional[Decimal] = Field(default=None, alias="Accepted_By")
+    accepted_at: Optional[datetime] = Field(default=None, alias="Accepted_At")
+    declined_by: Optional[Decimal] = Field(default=None, alias="Declined_By")
+    declined_at: Optional[datetime] = Field(default=None, alias="Declined_At")
+    requested_tech_id: Optional[Decimal] = Field(default=None, alias="Requested_Tech_ID")
+    assigned_tech_id: Optional[Decimal] = Field(default=None, alias="Assigned_Tech_ID")
+    actual_tech_id: Optional[Decimal] = Field(default=None, alias="Actual_Tech_ID")
+    investigator_id: Optional[Decimal] = Field(default=None, alias="Investigator_ID")
+    request_date: Optional[datetime] = Field(default=None, alias="Request_Date")
+    schedule_date: Optional[datetime] = Field(default=None, alias="Schedule_Date")
+    complete_date: Optional[datetime] = Field(default=None, alias="Complete_Date")
+    generation: Optional[Decimal] = Field(default=None, alias="Generation")
+    row_created: Optional[datetime] = Field(default=None, alias="Row_Created")
+    row_modified: Optional[datetime] = Field(default=None, alias="Row_Modified")
+    created_by: Optional[Decimal] = Field(default=None, alias="Created_By")
+    modified_by: Optional[Decimal] = Field(default=None, alias="Modified_By")
+    cancelled_at: Optional[datetime] = Field(default=None, alias="Cancelled_At")
+    cancelled_by: Optional[Decimal] = Field(default=None, alias="Cancelled_By")
+    date_start: Optional[datetime] = Field(default=None, alias="Date_Start")
+    date_end: Optional[datetime] = Field(default=None, alias="Date_End")
+    pattern_id: Optional[Decimal] = Field(default=None, alias="Pattern_ID")
+    is_linked: Optional[str] = Field(default=None, alias="Is_Linked")
+    task_status: Optional[str] = Field(default=None, alias="Task_Status")
+    deleted_at: Optional[datetime] = Field(default=None, alias="Deleted_At")
+    deleted_by: Optional[Decimal] = Field(default=None, alias="Deleted_By")
+    completed_at: Optional[datetime] = Field(default=None, alias="Completed_At")
+    completed_by: Optional[Decimal] = Field(default=None, alias="Completed_By")
+    scheduled_at: Optional[datetime] = Field(default=None, alias="Scheduled_At")
+    scheduled_by: Optional[Decimal] = Field(default=None, alias="Scheduled_By")
+    cost_center_id: Optional[Decimal] = Field(default=None, alias="Cost_Center_ID")
+    task_description: Optional[str] = Field(default=None, alias="Task_Description")
+    task_comment: Optional[str] = Field(default=None, alias="Task_Comment")
+    duration_accrual: Optional[str] = Field(default=None, alias="Duration_Accrual")
+    price_accrual: Optional[str] = Field(default=None, alias="Price_Accrual")
+    actual_rate: Optional[Decimal] = Field(default=None, alias="Actual_Rate")
+    task_color_code: Optional[Decimal] = Field(default=None, alias="Task_Color_Code")
+    time_spent: Optional[Decimal] = Field(default=None, alias="Time_Spent")
+    grant_id: Optional[Decimal] = Field(default=None, alias="Grant_Id")
+    facility_id: Optional[Decimal] = Field(default=None, alias="Facility_Id")
+    team_id: Optional[Decimal] = Field(default=None, alias="Team_Id")
+    resource_type: Optional[str] = Field(default=None, alias="Resource_Type")
+
+
+class TaskSetObject(SQLModel, table=True):
+    """TaskSetObject Table schema auto generated from script"""
+
+    # Actual table name has an underscore
+    # noinspection SpellCheckingInspection
+    __tablename__ = "Task_Set_Object"
+
+    id: Optional[Decimal] = Field(default=None, alias="ID")
+    task_id: Optional[Decimal] = Field(default=None, alias="Task_ID")
+    task_object: Optional[Decimal] = Field(default=None, alias="Task_Object")
+    generation: Optional[Decimal] = Field(default=None, alias="Generation")
+    row_created: Optional[datetime] = Field(default=None, alias="Row_Created")
+    row_modified: Optional[datetime] = Field(default=None, alias="Row_Modified")
+    created_by: Optional[Decimal] = Field(default=None, alias="Created_By")
+    modified_by: Optional[Decimal] = Field(default=None, alias="Modified_By")
+    final_investigator_id: Optional[Decimal] = Field(default=None, alias="Final_Investigator_ID")
+    resource_type: Optional[str] = Field(default=None, alias="Resource_Type")
+
+
+class TaskType(SQLModel, table=True):
+    """TaskType Table schema auto generated from script"""
+
+    # Actual table name has an underscore
+    # noinspection SpellCheckingInspection
+    __tablename__ = "Task_Type"
+
+    id: Optional[Decimal] = Field(default=None, alias="ID")
+    class_def_id: Optional[Decimal] = Field(default=None, alias="Class_Def_ID")
+    class_values: Optional[str] = Field(default=None, alias="Class_Values")
+    resource_id: Optional[Decimal] = Field(default=None, alias="Resource_ID")
+    type_name: Optional[str] = Field(default=None, alias="Type_Name")
+    rent_item_id: Optional[Decimal] = Field(default=None, alias="Rent_Item_ID")
+    display_color: Optional[Decimal] = Field(default=None, alias="Display_Color")
+    generation: Optional[Decimal] = Field(default=None, alias="Generation")
+    row_created: Optional[datetime] = Field(default=None, alias="Row_Created")
+    row_modified: Optional[datetime] = Field(default=None, alias="Row_Modified")
+    created_by: Optional[Decimal] = Field(default=None, alias="Created_By")
+    modified_by: Optional[Decimal] = Field(default=None, alias="Modified_By")
+    process_length: Optional[Decimal] = Field(default=None, alias="Process_Length")
+    task_description: Optional[str] = Field(default=None, alias="Task_Description")
+    duration_accrual: Optional[str] = Field(default=None, alias="Duration_Accrual")
+    price_accrual: Optional[str] = Field(default=None, alias="Price_Accrual")
+    is_chargeable: Optional[str] = Field(default=None, alias="Is_Chargeable")
+    is_regulated: Optional[str] = Field(default=None, alias="Is_Regulated")
+    resource_type: Optional[str] = Field(default=None, alias="Resource_Type")
+
+
 class Groups(SQLModel, table=True):
     """Groups Table schema auto generated from script"""
 
