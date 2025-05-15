@@ -15,15 +15,18 @@ from sqlmodel import SQLModel, create_engine
 
 from aind_labtracks_service_server.main import app
 from aind_labtracks_service_server.models import (
+    AcucProtocol,
     AnimalsCommon,
     Groups,
     MouseCustomClass,
+    Procedure,
     Species,
     Subject,
+    TaskSet,
+    TaskSetObject,
+    TaskType,
 )
-from aind_labtracks_service_server.session import (
-    get_session as get_lb_session,
-)
+from aind_labtracks_service_server.session import get_session as get_lb_session
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / "resources"
 
@@ -72,6 +75,26 @@ def test_labtracks_subject():
     )
 
 
+@pytest.fixture(scope="module")
+def test_labtracks_procedure():
+    """A common lab_tracks subject pulled from their db"""
+    return Procedure(
+        id=Decimal("2356051.0000000000"),
+        type_name="Tattoo/Tail Tip",
+        date_start=datetime(2022, 5, 10, 14, 9, 22, 157000),
+        date_end=datetime(2022, 5, 10, 14, 39, 22, 157000),
+        investigator_id=Decimal("30046.0000000000"),
+        task_object=Decimal("632269.0000000000"),
+        protocol_number="2116",
+        protocol_title="Mouse Breeding",
+        task_status="F",
+        task_description=(
+            "If pups are added to litter,"
+            " adjust all tasks associated with the litter."
+        ),
+    )
+
+
 @pytest.fixture(scope="session")
 def get_labtracks_session():
     """Generate a sqlite database to query lab_tracks data."""
@@ -97,6 +120,18 @@ def get_labtracks_session():
     for s_row in test_db["species"]:
         s = Species.model_validate(s_row)
         session.add(s)
+    for ts_row in test_db["task_set"]:
+        ts = TaskSet.model_validate(ts_row)
+        session.add(ts)
+    for tso_row in test_db["task_set_object"]:
+        tso = TaskSetObject.model_validate(tso_row)
+        session.add(tso)
+    for tt_row in test_db["task_type"]:
+        tt = TaskType.model_validate(tt_row)
+        session.add(tt)
+    for ap_row in test_db["acuc_protocol"]:
+        ap = AcucProtocol.model_validate(ap_row)
+        session.add(ap)
     session.commit()
     try:
         yield session

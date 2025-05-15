@@ -6,7 +6,11 @@ from fastapi import APIRouter, Depends, HTTPException, Path, status
 from sqlmodel import Session
 
 from aind_labtracks_service_server.handler import SessionHandler
-from aind_labtracks_service_server.models import HealthCheck, Subject
+from aind_labtracks_service_server.models import (
+    HealthCheck,
+    Procedure,
+    Subject,
+)
 from aind_labtracks_service_server.session import get_session
 
 router = APIRouter()
@@ -49,3 +53,24 @@ async def get_subject(
         raise HTTPException(status_code=404, detail="Not found")
     else:
         return lab_tracks_subjects
+
+
+@router.get(
+    "/procedures/{subject_id}",
+    response_model=List[Procedure],
+)
+async def get_procedures(
+    subject_id: str = Path(..., examples=["632269"]),
+    session: Session = Depends(get_session),
+):
+    """
+    ## Subject metadata
+    Retrieves subject information from LabTracks.
+    """
+    lab_tracks_procedures = SessionHandler(session=session).get_procedure_view(
+        subject_id=subject_id
+    )
+    if len(lab_tracks_procedures) == 0:
+        raise HTTPException(status_code=404, detail="Not found")
+    else:
+        return lab_tracks_procedures

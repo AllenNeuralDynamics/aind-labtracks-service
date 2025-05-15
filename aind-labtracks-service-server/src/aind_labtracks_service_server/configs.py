@@ -2,11 +2,11 @@
 
 from urllib.parse import quote_plus
 
-from pydantic import Field, SecretStr
-from pydantic_settings import SettingsConfigDict
 from aind_settings_utils.aws import (
     ParameterStoreAppBaseSettings,
 )
+from pydantic import Field, SecretStr
+from pydantic_settings import SettingsConfigDict
 
 
 class Settings(ParameterStoreAppBaseSettings):
@@ -14,8 +14,7 @@ class Settings(ParameterStoreAppBaseSettings):
 
     # noinspection SpellCheckingInspection
     model_config = SettingsConfigDict(
-        env_prefix="LABTRACKS_",
-        case_sensitive=False
+        env_prefix="LABTRACKS_", case_sensitive=False
     )
     # noinspection SpellCheckingInspection
     driver: str = Field(

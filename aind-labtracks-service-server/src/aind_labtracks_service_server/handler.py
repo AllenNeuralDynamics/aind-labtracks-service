@@ -6,10 +6,15 @@ from sqlalchemy.orm import aliased
 from sqlmodel import Session, select
 
 from aind_labtracks_service_server.models import (
+    AcucProtocol,
     AnimalsCommon,
     Groups,
+    Procedure,
     Species,
     Subject,
+    TaskSet,
+    TaskSetObject,
+    TaskType,
 )
 
 
@@ -70,3 +75,47 @@ class SessionHandler:
         results = self.session.execute(statement=statement)
         subject_models = [Subject.model_validate(r) for r in results]
         return subject_models
+
+    def get_procedure_view(
+        self, subject_id: Union[str, int]
+    ) -> List[Procedure]:
+        """
+        Get a procedures view from LabTracks by joining several tables.
+        Parameters
+        ----------
+        subject_id : Union[str, int]
+          ID of mouse to pull information about.
+
+        Returns
+        -------
+        List[Procedure]
+          List of Procedure models. If more than one row is returned, then this
+          is likely due to an error with data entry into LabTracks.
+
+        """
+        subject_id = int(subject_id)
+        ts = aliased(TaskSet, name="ts")
+        tso = aliased(TaskSetObject, name="tso")
+        tt = aliased(TaskType, name="tt")
+        ap = aliased(AcucProtocol, name="ap")
+        statement = (
+            select(
+                ts.id,
+                tt.type_name,
+                ts.date_start,
+                ts.date_end,
+                ts.investigator_id,
+                ts.task_description,
+                tso.task_object,
+                ap.protocol_number,
+                ap.protocol_title,
+                ts.task_status,
+            )
+            .where(tso.task_object == subject_id)
+            .outerjoin(tso, ts.id == tso.task_id)
+            .outerjoin(tt, ts.task_type_id == tt.id)
+            .outerjoin(ap, ts.acuc_link_id == ap.link_index)
+        )
+        results = self.session.execute(statement=statement)
+        procedure_models = [Procedure.model_validate(r) for r in results]
+        return procedure_models
