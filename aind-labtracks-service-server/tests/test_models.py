@@ -136,13 +136,15 @@ class TestProcedure(unittest.TestCase):
         raw = (
             'Create cages in a \"Surgical Group\" in LT.'
             ' Prep per LASWI-0021 Surgical Cage Preparation.\r\n\r\n    '
-            'Ear Notch and Tattoo Confirmation (__) Does cage need a change flag? (___)'
+            'Ear Notch and Tattoo Confirmation (__) '
+            'Does cage need a change flag? (___)'
             ' Entered into Post-operative observation sheet?  (__)'
         )
         expected = (
             'Create cages in a "Surgical Group" in LT.'
             ' Prep per LASWI-0021 Surgical Cage Preparation.'
-            ' Ear Notch and Tattoo Confirmation (__) Does cage need a change flag? (___)'
+            ' Ear Notch and Tattoo Confirmation (__) '
+            'Does cage need a change flag? (___)'
             ' Entered into Post-operative observation sheet? (__)'
         )
         proc = Procedure(
