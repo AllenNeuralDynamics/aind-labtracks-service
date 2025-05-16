@@ -470,7 +470,7 @@
          "usda_code": null,
          "investigator_index": "8609",
          "location": "Some Location",
-         "email_address": "someEmail@email.org",
+         "email_address": "someEmail@example.com",
          "phone_number": "0000",
          "email_list_id": null,
          "study_monitor": null,

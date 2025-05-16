@@ -89,8 +89,7 @@ class SessionHandler:
         Returns
         -------
         List[Procedure]
-          List of Procedure models. If more than one row is returned, then this
-          is likely due to an error with data entry into LabTracks.
+          List of Procedure models. More than one row can be returned.
 
         """
         subject_id = int(subject_id)
@@ -112,9 +111,9 @@ class SessionHandler:
                 ts.task_status,
             )
             .where(tso.task_object == subject_id)
-            .outerjoin(tso, ts.id == tso.task_id)
-            .outerjoin(tt, ts.task_type_id == tt.id)
-            .outerjoin(ap, ts.acuc_link_id == ap.link_index)
+            .join(tso, ts.id == tso.task_id)
+            .join(tt, ts.task_type_id == tt.id)
+            .join(ap, ts.acuc_link_id == ap.link_index)
         )
         results = self.session.execute(statement=statement)
         procedure_models = [Procedure.model_validate(r) for r in results]
