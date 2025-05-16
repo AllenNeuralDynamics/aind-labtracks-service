@@ -55,27 +55,25 @@ class TestSubjectRoute:
         assert 500 == response.status_code
 
 
-class TestProceduresRoute:
-    """Test procedures responses."""
+class TestTasksRoute:
+    """Test tasks responses."""
 
-    def test_get_200_procedures(
-        self, client, get_labtracks_session, test_labtracks_procedure
+    def test_get_200_tasks(
+        self, client, get_labtracks_session, test_labtracks_task
     ):
         """Tests a good response"""
-        response = client.get("/procedures/632269")
+        response = client.get("/tasks/632269")
         assert 200 == response.status_code
-        assert [
-            test_labtracks_procedure.model_dump(mode="json")
-        ] == response.json()
+        assert [test_labtracks_task.model_dump(mode="json")] == response.json()
 
-    def test_get_404_procedures(
+    def test_get_404_tasks(
         self,
         client,
         get_labtracks_session,
     ):
         """Tests a missing data response"""
 
-        response = client.get("/procedures/0")
+        response = client.get("/tasks/0")
         expected_response = {"detail": "Not found"}
         assert 404 == response.status_code
         assert expected_response == response.json()
@@ -87,10 +85,10 @@ class TestProceduresRoute:
 
         with patch(
             "aind_labtracks_service_server.handler.SessionHandler"
-            ".get_procedure_view",
+            ".get_task_view",
             side_effect=Exception("Something went wrong"),
         ):
-            response = client.get("/procedures/1234")
+            response = client.get("/tasks/1234")
 
         assert 500 == response.status_code
 

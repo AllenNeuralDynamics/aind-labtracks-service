@@ -10,7 +10,7 @@ from aind_labtracks_service_server.models import (
     SexNames,
     SpeciesNames,
     Subject,
-    Procedure,
+    Task,
 )
 
 
@@ -129,27 +129,27 @@ class TestSubject(unittest.TestCase):
         self.assertEqual(Subject(id=123456), lab_tracks_subject)
 
 
-class TestProcedure(unittest.TestCase):
-    """Test validators in Procedure class"""
+class TestTask(unittest.TestCase):
+    """Test validators in Task class"""
 
     def test_parse_task_description(self):
         """Tests task description is parsed correctly"""
 
         raw = (
-            'Create cages in a \"Surgical Group\" in LT.'
-            ' Prep per LASWI-0021 Surgical Cage Preparation.\r\n\r\n    '
-            'Ear Notch and Tattoo Confirmation (__) '
-            'Does cage need a change flag? (___)'
-            ' Entered into Post-operative observation sheet?  (__)'
+            'Create cages in a "Surgical Group" in LT.'
+            " Prep per LASWI-0021 Surgical Cage Preparation.\r\n\r\n    "
+            "Ear Notch and Tattoo Confirmation (__) "
+            "Does cage need a change flag? (___)"
+            " Entered into Post-operative observation sheet?  (__)"
         )
         expected = (
             'Create cages in a "Surgical Group" in LT.'
-            ' Prep per LASWI-0021 Surgical Cage Preparation.'
-            ' Ear Notch and Tattoo Confirmation (__) '
-            'Does cage need a change flag? (___)'
-            ' Entered into Post-operative observation sheet? (__)'
+            " Prep per LASWI-0021 Surgical Cage Preparation."
+            " Ear Notch and Tattoo Confirmation (__) "
+            "Does cage need a change flag? (___)"
+            " Entered into Post-operative observation sheet? (__)"
         )
-        proc = Procedure(
+        proc = Task(
             id=1,
             type_name="Test",
             date_start=None,
@@ -167,7 +167,7 @@ class TestProcedure(unittest.TestCase):
     def test_parse_task_description_none(self):
         """Tests task description is None"""
 
-        proc = Procedure(
+        proc = Task(
             id=1,
             type_name="Test",
             date_start=None,

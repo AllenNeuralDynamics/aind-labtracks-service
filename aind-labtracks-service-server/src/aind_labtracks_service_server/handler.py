@@ -9,12 +9,12 @@ from aind_labtracks_service_server.models import (
     AcucProtocol,
     AnimalsCommon,
     Groups,
-    Procedure,
     Species,
     Subject,
     TaskSet,
     TaskSetObject,
     TaskType,
+    Task,
 )
 
 
@@ -76,11 +76,10 @@ class SessionHandler:
         subject_models = [Subject.model_validate(r) for r in results]
         return subject_models
 
-    def get_procedure_view(
-        self, subject_id: Union[str, int]
-    ) -> List[Procedure]:
+    def get_task_view(self, subject_id: Union[str, int]) -> List[Task]:
         """
-        Get a procedures view from LabTracks by joining several tables.
+        Get a task view from LabTracks by joining several tables.
+        Tasks include cage prep, non-surgical procedures, breeding, etc.
         Parameters
         ----------
         subject_id : Union[str, int]
@@ -88,8 +87,8 @@ class SessionHandler:
 
         Returns
         -------
-        List[Procedure]
-          List of Procedure models. More than one row can be returned.
+        List[Task]
+          List of Task models. More than one row can be returned.
 
         """
         subject_id = int(subject_id)
@@ -97,6 +96,7 @@ class SessionHandler:
         tso = aliased(TaskSetObject, name="tso")
         tt = aliased(TaskType, name="tt")
         ap = aliased(AcucProtocol, name="ap")
+        ac = aliased(AnimalsCommon, name="ac")
         statement = (
             select(
                 ts.id,
@@ -110,11 +110,13 @@ class SessionHandler:
                 ap.protocol_title,
                 ts.task_status,
             )
-            .where(tso.task_object == subject_id)
+            # .select_from(ts)
+            .where(ac.id == subject_id)
             .join(tso, ts.id == tso.task_id)
+            .join(ac, ac.id == tso.task_object)
             .join(tt, ts.task_type_id == tt.id)
             .join(ap, ts.acuc_link_id == ap.link_index)
         )
         results = self.session.execute(statement=statement)
-        procedure_models = [Procedure.model_validate(r) for r in results]
-        return procedure_models
+        task_models = [Task.model_validate(r) for r in results]
+        return task_models

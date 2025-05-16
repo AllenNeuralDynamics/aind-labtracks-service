@@ -8,7 +8,7 @@ from sqlmodel import Session
 from aind_labtracks_service_server.handler import SessionHandler
 from aind_labtracks_service_server.models import (
     HealthCheck,
-    Procedure,
+    Task,
     Subject,
 )
 from aind_labtracks_service_server.session import get_session
@@ -56,21 +56,21 @@ async def get_subject(
 
 
 @router.get(
-    "/procedures/{subject_id}",
-    response_model=List[Procedure],
+    "/tasks/{subject_id}",
+    response_model=List[Task],
 )
-async def get_procedures(
+async def get_tasks(
     subject_id: str = Path(..., examples=["632269"]),
     session: Session = Depends(get_session),
 ):
     """
-    ## Subject metadata
-    Retrieves subject information from LabTracks.
+    ## Task metadata
+    Retrieves Task information from LabTracks.
     """
-    lab_tracks_procedures = SessionHandler(session=session).get_procedure_view(
+    lab_tracks_tasks = SessionHandler(session=session).get_task_view(
         subject_id=subject_id
     )
-    if len(lab_tracks_procedures) == 0:
+    if len(lab_tracks_tasks) == 0:
         raise HTTPException(status_code=404, detail="Not found")
     else:
-        return lab_tracks_procedures
+        return lab_tracks_tasks

@@ -19,12 +19,12 @@ from aind_labtracks_service_server.models import (
     AnimalsCommon,
     Groups,
     MouseCustomClass,
-    Procedure,
     Species,
     Subject,
     TaskSet,
     TaskSetObject,
     TaskType,
+    Task,
 )
 from aind_labtracks_service_server.session import get_session as get_lb_session
 
@@ -76,9 +76,9 @@ def test_labtracks_subject():
 
 
 @pytest.fixture(scope="module")
-def test_labtracks_procedure():
+def test_labtracks_task():
     """A common lab_tracks subject pulled from their db"""
-    return Procedure(
+    return Task(
         id=Decimal("2356051.0000000000"),
         type_name="Tattoo/Tail Tip",
         date_start=datetime(2022, 5, 10, 14, 9, 22, 157000),

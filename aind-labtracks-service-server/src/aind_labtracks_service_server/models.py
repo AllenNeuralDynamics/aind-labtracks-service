@@ -628,8 +628,8 @@ class Subject(SQLModel):
             return None
 
 
-class Procedure(SQLModel):
-    """Expected Procedure view of joined tables"""
+class Task(SQLModel):
+    """Expected Task view of joined tables"""
 
     id: Decimal = Field(...)
     type_name: Optional[str] = Field(default=None)
