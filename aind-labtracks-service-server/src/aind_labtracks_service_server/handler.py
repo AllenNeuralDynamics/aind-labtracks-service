@@ -110,7 +110,6 @@ class SessionHandler:
                 ap.protocol_title,
                 ts.task_status,
             )
-            # .select_from(ts)
             .where(ac.id == subject_id)
             .join(tso, ts.id == tso.task_id)
             .join(ac, ac.id == tso.task_object)
