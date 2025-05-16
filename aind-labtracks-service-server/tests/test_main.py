@@ -21,5 +21,6 @@ class TestMain:
         response = client.get("/tasks/632269")
         assert 200 == response.status_code
 
+
 if __name__ == "__main__":
     pytest.main([__file__])

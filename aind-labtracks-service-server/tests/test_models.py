@@ -127,5 +127,6 @@ class TestSubject(unittest.TestCase):
         )
         self.assertEqual(Subject(id=123456), lab_tracks_subject)
 
+
 if __name__ == "__main__":
     unittest.main()

@@ -641,4 +641,3 @@ class Task(SQLModel):
     protocol_number: Optional[str] = Field(default=None)
     protocol_title: Optional[str] = Field(default=None)
     task_status: Optional[str] = Field(default=None)
-    
