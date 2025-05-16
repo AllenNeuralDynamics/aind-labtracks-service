@@ -55,5 +55,43 @@ class TestSubjectRoute:
         assert 500 == response.status_code
 
 
+class TestTasksRoute:
+    """Test tasks responses."""
+
+    def test_get_200_tasks(
+        self, client, get_labtracks_session, test_labtracks_task
+    ):
+        """Tests a good response"""
+        response = client.get("/tasks/632269")
+        assert 200 == response.status_code
+        assert [test_labtracks_task.model_dump(mode="json")] == response.json()
+
+    def test_get_404_tasks(
+        self,
+        client,
+        get_labtracks_session,
+    ):
+        """Tests a missing data response"""
+
+        response = client.get("/tasks/0")
+        expected_response = {"detail": "Not found"}
+        assert 404 == response.status_code
+        assert expected_response == response.json()
+
+    def test_500_internal_server_error(
+        self, client, get_labtracks_session, caplog
+    ):
+        """Tests an internal server error response"""
+
+        with patch(
+            "aind_labtracks_service_server.handler.SessionHandler"
+            ".get_task_view",
+            side_effect=Exception("Something went wrong"),
+        ):
+            response = client.get("/tasks/1234")
+
+        assert 500 == response.status_code
+
+
 if __name__ == "__main__":
     pytest.main([__file__])

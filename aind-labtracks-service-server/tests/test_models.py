@@ -76,9 +76,7 @@ class TestSubject(unittest.TestCase):
         )
         self.assertEqual(expected_subject, lab_tracks_subject)
 
-    @patch(
-        "aind_labtracks_service_server.models.MouseCustomClass.from_xml"
-    )
+    @patch("aind_labtracks_service_server.models.MouseCustomClass.from_xml")
     def test_parse_xml_string_validation_errors(
         self, mock_parse_xml: MagicMock
     ):
@@ -99,9 +97,7 @@ class TestSubject(unittest.TestCase):
             ["WARNING:root:Pydantic validation error: []"], captured.output
         )
 
-    @patch(
-        "aind_labtracks_service_server.models.MouseCustomClass.from_xml"
-    )
+    @patch("aind_labtracks_service_server.models.MouseCustomClass.from_xml")
     def test_parse_xml_string_exception(self, mock_parse_xml: MagicMock):
         """Tests edge case where an exception happens"""
 

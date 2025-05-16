@@ -16,6 +16,11 @@ class TestMain:
         response = client.get("/subject/632269")
         assert 200 == response.status_code
 
+    def test_get_tasks(self, client, get_labtracks_session):
+        """Tests tasks"""
+        response = client.get("/tasks/632269")
+        assert 200 == response.status_code
+
 
 if __name__ == "__main__":
     pytest.main([__file__])

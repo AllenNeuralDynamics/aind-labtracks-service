@@ -6,10 +6,15 @@ from sqlalchemy.orm import aliased
 from sqlmodel import Session, select
 
 from aind_labtracks_service_server.models import (
+    AcucProtocol,
     AnimalsCommon,
     Groups,
     Species,
     Subject,
+    TaskSet,
+    TaskSetObject,
+    TaskType,
+    Task,
 )
 
 
@@ -70,3 +75,47 @@ class SessionHandler:
         results = self.session.execute(statement=statement)
         subject_models = [Subject.model_validate(r) for r in results]
         return subject_models
+
+    def get_task_view(self, subject_id: Union[str, int]) -> List[Task]:
+        """
+        Get a task view from LabTracks by joining several tables.
+        Tasks include cage prep, non-surgical procedures, breeding, etc.
+        Parameters
+        ----------
+        subject_id : Union[str, int]
+          ID of mouse to pull information about.
+
+        Returns
+        -------
+        List[Task]
+          List of Task models. More than one row can be returned.
+
+        """
+        subject_id = int(subject_id)
+        ts = aliased(TaskSet, name="ts")
+        tso = aliased(TaskSetObject, name="tso")
+        tt = aliased(TaskType, name="tt")
+        ap = aliased(AcucProtocol, name="ap")
+        ac = aliased(AnimalsCommon, name="ac")
+        statement = (
+            select(
+                ts.id,
+                tt.type_name,
+                ts.date_start,
+                ts.date_end,
+                ts.investigator_id,
+                ts.task_description,
+                tso.task_object,
+                ap.protocol_number,
+                ap.protocol_title,
+                ts.task_status,
+            )
+            .where(ac.id == subject_id)
+            .join(tso, ts.id == tso.task_id)
+            .join(ac, ac.id == tso.task_object)
+            .join(tt, ts.task_type_id == tt.id)
+            .join(ap, ts.acuc_link_id == ap.link_index)
+        )
+        results = self.session.execute(statement=statement)
+        task_models = [Task.model_validate(r) for r in results]
+        return task_models
