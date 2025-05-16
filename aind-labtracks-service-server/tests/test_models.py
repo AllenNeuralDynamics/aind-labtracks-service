@@ -166,7 +166,7 @@ class TestProcedure(unittest.TestCase):
 
     def test_parse_task_description_none(self):
         """Tests task description is None"""
-        
+
         proc = Procedure(
             id=1,
             type_name="Test",
