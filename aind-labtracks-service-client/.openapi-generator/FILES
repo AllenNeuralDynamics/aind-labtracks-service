@@ -17,6 +17,7 @@ aind_labtracks_service_client/models/health_check.py
 aind_labtracks_service_client/models/http_validation_error.py
 aind_labtracks_service_client/models/mouse_custom_class.py
 aind_labtracks_service_client/models/subject.py
+aind_labtracks_service_client/models/task.py
 aind_labtracks_service_client/models/validation_error.py
 aind_labtracks_service_client/models/validation_error_loc_inner.py
 aind_labtracks_service_client/py.typed
@@ -27,6 +28,7 @@ docs/HealthCheck.md
 docs/HealthcheckApi.md
 docs/MouseCustomClass.md
 docs/Subject.md
+docs/Task.md
 docs/ValidationError.md
 docs/ValidationErrorLocInner.md
 git_push.sh
@@ -42,6 +44,7 @@ test/test_healthcheck_api.py
 test/test_http_validation_error.py
 test/test_mouse_custom_class.py
 test/test_subject.py
+test/test_task.py
 test/test_validation_error.py
 test/test_validation_error_loc_inner.py
 tox.ini
