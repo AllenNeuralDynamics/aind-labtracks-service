@@ -77,7 +77,7 @@ def test_labtracks_subject():
 
 @pytest.fixture(scope="module")
 def test_labtracks_task():
-    """A common lab_tracks subject pulled from their db"""
+    """A common lab_tracks task pulled from their db"""
     return Task(
         id=Decimal("2356051.0000000000"),
         type_name="Tattoo/Tail Tip",

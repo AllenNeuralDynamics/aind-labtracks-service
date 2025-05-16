@@ -641,13 +641,4 @@ class Task(SQLModel):
     protocol_number: Optional[str] = Field(default=None)
     protocol_title: Optional[str] = Field(default=None)
     task_status: Optional[str] = Field(default=None)
-
-    @field_validator("task_description", mode="before")
-    @classmethod
-    def parse_task_description(cls, value: Optional[str]) -> Optional[str]:
-        """
-        Cleans up the task_description field
-        """
-        if value and isinstance(value, str):
-            return " ".join(value.split())
-        return value
+    
