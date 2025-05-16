@@ -133,6 +133,8 @@ class TestProcedure(unittest.TestCase):
     """Test validators in Procedure class"""
 
     def test_parse_task_description(self):
+        """Tests task description is parsed correctly"""
+
         raw = (
             'Create cages in a \"Surgical Group\" in LT.'
             ' Prep per LASWI-0021 Surgical Cage Preparation.\r\n\r\n    '
@@ -163,6 +165,8 @@ class TestProcedure(unittest.TestCase):
         self.assertEqual(proc.task_description, expected)
 
     def test_parse_task_description_none(self):
+        """Tests task description is None"""
+        
         proc = Procedure(
             id=1,
             type_name="Test",
