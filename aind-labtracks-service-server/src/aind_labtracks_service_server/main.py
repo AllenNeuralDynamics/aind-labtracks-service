@@ -14,7 +14,7 @@ log_level = os.getenv("LOG_LEVEL", "INFO")
 logging.basicConfig(level=log_level)
 
 description = """
-## aind-labtracks-service-server
+## aind-labtracks-service
 
 Service to fetch data from LabTracks.
 
@@ -22,7 +22,7 @@ Service to fetch data from LabTracks.
 
 # noinspection PyTypeChecker
 app = FastAPI(
-    title="aind-labtracks-service-server",
+    title="aind-labtracks-service",
     description=description,
     summary="Serves data from LabTracks.",
     version=service_version,

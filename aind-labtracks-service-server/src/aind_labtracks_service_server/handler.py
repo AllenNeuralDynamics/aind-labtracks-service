@@ -11,10 +11,10 @@ from aind_labtracks_service_server.models import (
     Groups,
     Species,
     Subject,
+    Task,
     TaskSet,
     TaskSetObject,
     TaskType,
-    Task,
 )
 
 

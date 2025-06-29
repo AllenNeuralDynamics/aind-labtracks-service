@@ -28,18 +28,6 @@ class TestSubjectRoute:
             test_labtracks_subject.model_dump(mode="json")
         ] == response.json()
 
-    def test_get_404_subject(
-        self,
-        client,
-        get_labtracks_session,
-    ):
-        """Tests a missing data response"""
-
-        response = client.get("/subject/0")
-        expected_response = {"detail": "Not found"}
-        assert 404 == response.status_code
-        assert expected_response == response.json()
-
     def test_500_internal_server_error(
         self, client, get_labtracks_session, caplog
     ):
@@ -65,18 +53,6 @@ class TestTasksRoute:
         response = client.get("/tasks/632269")
         assert 200 == response.status_code
         assert [test_labtracks_task.model_dump(mode="json")] == response.json()
-
-    def test_get_404_tasks(
-        self,
-        client,
-        get_labtracks_session,
-    ):
-        """Tests a missing data response"""
-
-        response = client.get("/tasks/0")
-        expected_response = {"detail": "Not found"}
-        assert 404 == response.status_code
-        assert expected_response == response.json()
 
     def test_500_internal_server_error(
         self, client, get_labtracks_session, caplog

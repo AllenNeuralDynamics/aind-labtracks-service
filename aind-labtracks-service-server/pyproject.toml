@@ -63,6 +63,7 @@ exclude = '''
     | _build
     | build
     | dist
+    | env
   )/
   | .gitignore
 )
@@ -86,7 +87,7 @@ line_length = 79
 profile = "black"
 
 [tool.interrogate]
-exclude = ["setup.py", "docs", "build"]
+exclude = ["setup.py", "docs", "build", "env"]
 fail-under = 100
 
 [tool.pytest.ini_options]
