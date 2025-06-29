@@ -2,14 +2,14 @@
 
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException, Path, status
+from fastapi import APIRouter, Depends, Path, status
 from sqlmodel import Session
 
 from aind_labtracks_service_server.handler import SessionHandler
 from aind_labtracks_service_server.models import (
     HealthCheck,
-    Task,
     Subject,
+    Task,
 )
 from aind_labtracks_service_server.session import get_session
 
@@ -24,7 +24,7 @@ router = APIRouter()
     status_code=status.HTTP_200_OK,
     response_model=HealthCheck,
 )
-async def get_health() -> HealthCheck:
+def get_health() -> HealthCheck:
     """
     Endpoint to perform a healthcheck on.
 
@@ -38,7 +38,7 @@ async def get_health() -> HealthCheck:
     "/subject/{subject_id}",
     response_model=List[Subject],
 )
-async def get_subject(
+def get_subject(
     subject_id: str = Path(..., examples=["632269"]),
     session: Session = Depends(get_session),
 ):
@@ -49,17 +49,14 @@ async def get_subject(
     lab_tracks_subjects = SessionHandler(session=session).get_subject_view(
         subject_id=subject_id
     )
-    if len(lab_tracks_subjects) == 0:
-        raise HTTPException(status_code=404, detail="Not found")
-    else:
-        return lab_tracks_subjects
+    return lab_tracks_subjects
 
 
 @router.get(
     "/tasks/{subject_id}",
     response_model=List[Task],
 )
-async def get_tasks(
+def get_tasks(
     subject_id: str = Path(..., examples=["632269"]),
     session: Session = Depends(get_session),
 ):
@@ -70,7 +67,4 @@ async def get_tasks(
     lab_tracks_tasks = SessionHandler(session=session).get_task_view(
         subject_id=subject_id
     )
-    if len(lab_tracks_tasks) == 0:
-        raise HTTPException(status_code=404, detail="Not found")
-    else:
-        return lab_tracks_tasks
+    return lab_tracks_tasks

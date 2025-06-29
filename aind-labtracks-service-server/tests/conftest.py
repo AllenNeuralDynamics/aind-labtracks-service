@@ -21,10 +21,10 @@ from aind_labtracks_service_server.models import (
     MouseCustomClass,
     Species,
     Subject,
+    Task,
     TaskSet,
     TaskSetObject,
     TaskType,
-    Task,
 )
 from aind_labtracks_service_server.session import get_session as get_lb_session
 
