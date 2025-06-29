@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "aind_labtracks_service_client"
-version = "0.1.1"
-description = "aind-labtracks-service-server"
+version = "0.2.0"
+description = "aind-labtracks-service"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"
 readme = "README.md"
 repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
-keywords = ["OpenAPI", "OpenAPI-Generator", "aind-labtracks-service-server"]
+keywords = ["OpenAPI", "OpenAPI-Generator", "aind-labtracks-service"]
 include = ["aind_labtracks_service_client/py.typed"]
 
 [tool.poetry.dependencies]
