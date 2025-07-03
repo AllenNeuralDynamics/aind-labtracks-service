@@ -36,7 +36,7 @@ configuration = aind_labtracks_service_client.Configuration(
 with aind_labtracks_service_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = aind_labtracks_service_client.DefaultApi(api_client)
-    subject_id = 'subject_id_example' # str | 
+    subject_id = '632269' # str | 
 
     try:
         # Get Subject
@@ -106,7 +106,7 @@ configuration = aind_labtracks_service_client.Configuration(
 with aind_labtracks_service_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = aind_labtracks_service_client.DefaultApi(api_client)
-    subject_id = 'subject_id_example' # str | 
+    subject_id = '632269' # str | 
 
     try:
         # Get Tasks
