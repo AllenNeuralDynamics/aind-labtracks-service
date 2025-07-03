@@ -39,7 +39,16 @@ def get_health() -> HealthCheck:
     response_model=List[Subject],
 )
 def get_subject(
-    subject_id: str = Path(..., examples=["632269"]),
+    subject_id: str = Path(
+        ...,
+        openapi_examples={
+            "default": {
+                "summary": "A sample subject ID",
+                "description": "Example subject ID for LabTracks",
+                "value": "632269",
+            }
+        },
+    ),
     session: Session = Depends(get_session),
 ):
     """
@@ -57,7 +66,16 @@ def get_subject(
     response_model=List[Task],
 )
 def get_tasks(
-    subject_id: str = Path(..., examples=["632269"]),
+    subject_id: str = Path(
+        ...,
+        openapi_examples={
+            "default": {
+                "summary": "A sample subject ID",
+                "description": "Example subject ID for LabTracks",
+                "value": "632269",
+            }
+        },
+    ),
     session: Session = Depends(get_session),
 ):
     """
