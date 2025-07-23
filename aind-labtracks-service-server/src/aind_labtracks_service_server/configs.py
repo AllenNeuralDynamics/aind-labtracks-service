@@ -2,20 +2,16 @@
 
 from urllib.parse import quote_plus
 
-from aind_settings_utils.aws import (
-    ParameterStoreAppBaseSettings,
-)
+from aind_settings_utils.aws import SecretsManagerBaseSettings
 from pydantic import Field, SecretStr
 from pydantic_settings import SettingsConfigDict
 
 
-class Settings(ParameterStoreAppBaseSettings):
+class Settings(SecretsManagerBaseSettings):
     """Settings needed to connect to LabTracks Database"""
 
     # noinspection SpellCheckingInspection
-    model_config = SettingsConfigDict(
-        env_prefix="LABTRACKS_", case_sensitive=False
-    )
+    model_config = SettingsConfigDict(env_prefix="LABTRACKS_")
     # noinspection SpellCheckingInspection
     driver: str = Field(
         default="FreeTDS&tds_version=8.0",
