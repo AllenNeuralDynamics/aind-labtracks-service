@@ -72,7 +72,7 @@ class SessionHandler:
             .outerjoin(g, ac.group_id == g.id)
             .outerjoin(gm, m.group_id == gm.id)
         )
-        results = self.session.execute(statement=statement)
+        results = self.session.execute(statement=statement).all()
         subject_models = [Subject.model_validate(r) for r in results]
         return subject_models
 
@@ -116,6 +116,6 @@ class SessionHandler:
             .join(tt, ts.task_type_id == tt.id)
             .join(ap, ts.acuc_link_id == ap.link_index)
         )
-        results = self.session.execute(statement=statement)
+        results = self.session.execute(statement=statement).all()
         task_models = [Task.model_validate(r) for r in results]
         return task_models

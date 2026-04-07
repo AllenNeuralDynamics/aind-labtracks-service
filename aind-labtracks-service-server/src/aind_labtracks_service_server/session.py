@@ -8,7 +8,9 @@ from aind_labtracks_service_server.configs import Settings
 # Settings will be pulled from env
 settings = Settings()
 
-engine = create_engine(url=settings.db_connection_str)
+engine = create_engine(
+    url=settings.db_connection_str, isolation_level="AUTOCOMMIT"
+)
 
 session_local = sessionmaker(
     bind=engine, class_=Session, expire_on_commit=False
