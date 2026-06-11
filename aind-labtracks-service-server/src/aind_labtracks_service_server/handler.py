@@ -47,6 +47,7 @@ class SessionHandler:
         g = aliased(Groups, name="g")
         gm = aliased(Groups, name="gm")
         s = aliased(Species, name="s")
+        ap = aliased(AcucProtocol, name="ap")
         # PyCharm raises warnings about the usage of the .label method
         # noinspection PyUnresolvedReferences
         statement = (
@@ -55,6 +56,7 @@ class SessionHandler:
                 ac.class_values,
                 ac.sex,
                 ac.birth_date,
+                ac.death_date,
                 s.species_name,
                 ac.cage_id,
                 ac.room_id,
@@ -64,6 +66,8 @@ class SessionHandler:
                 m.class_values.label("maternal_class_values"),
                 g.group_name,
                 gm.group_description.label("group_description"),
+                ap.protocol_number,
+                ap.protocol_title,
             )
             .where(ac.id == subject_id)
             .outerjoin(s, ac.species_id == s.id)
@@ -71,6 +75,7 @@ class SessionHandler:
             .outerjoin(m, ac.maternal_index == m.id)
             .outerjoin(g, ac.group_id == g.id)
             .outerjoin(gm, m.group_id == gm.id)
+            .outerjoin(ap, ac.acuc_link_id == ap.link_index)
         )
         results = self.session.execute(statement=statement).all()
         subject_models = [Subject.model_validate(r) for r in results]

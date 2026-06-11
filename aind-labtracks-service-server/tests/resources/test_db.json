@@ -18,7 +18,7 @@
          "grant_id": "11574200",
          "ho_genetic_status": null,
          "class_values": "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<MouseCustomClass xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n  <Reserved_by>Person A</Reserved_by>\r\n  <Reserve_Date>2022-07-14T00:00:00-07:00</Reserve_Date>\r\n  <Solution>1xPBS</Solution>\r\n  <Full_Genotype>Pvalb-IRES-Cre/wt;RCL-somBiPoles_mCerulean-WPRE/wt</Full_Genotype>\r\n  <Phenotype>P19: TSTW. Small body, large head, slightly dehydrated. 3.78g. P22: 5.59g. P26: 8.18g. Normal body proportions. </Phenotype>\r\n</MouseCustomClass>",
-         "acuc_link_id": "574197",
+         "acuc_link_id": "583474",
          "ho_new_genetic_line": null,
          "animal_class": "M",
          "species_id": "5",
