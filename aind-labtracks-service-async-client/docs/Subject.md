@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **class_values** | [**MouseCustomClass**](MouseCustomClass.md) |  | [optional] 
 **sex** | **str** |  | [optional] 
 **birth_date** | **datetime** |  | [optional] 
+**death_date** | **datetime** |  | [optional] 
 **species_name** | **str** |  | [optional] 
 **cage_id** | **str** |  | [optional] 
 **room_id** | **str** |  | [optional] 
@@ -19,6 +20,8 @@ Name | Type | Description | Notes
 **maternal_class_values** | [**MouseCustomClass**](MouseCustomClass.md) |  | [optional] 
 **group_name** | **str** |  | [optional] 
 **group_description** | **str** |  | [optional] 
+**protocol_number** | **str** |  | [optional] 
+**protocol_title** | **str** |  | [optional] 
 
 ## Example
 
