@@ -587,6 +587,7 @@ class Subject(SQLModel):
     class_values: Optional[MouseCustomClass] = Field(default=None)
     sex: Optional[str] = Field(default=None)
     birth_date: Optional[datetime] = Field(default=None)
+    death_date: Optional[datetime] = Field(default=None)
     species_name: Optional[str] = Field(default=None)
     cage_id: Optional[Decimal] = Field(default=None)
     room_id: Optional[Decimal] = Field(default=None)
@@ -596,6 +597,8 @@ class Subject(SQLModel):
     maternal_class_values: Optional[MouseCustomClass] = Field(default=None)
     group_name: Optional[str] = Field(default=None)
     group_description: Optional[str] = Field(default=None)
+    protocol_number: Optional[str] = Field(default=None)
+    protocol_title: Optional[str] = Field(default=None)
 
     # noinspection PyNestedDecorators
     @field_validator(

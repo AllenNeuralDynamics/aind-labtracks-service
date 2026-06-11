@@ -49,6 +49,7 @@ def test_labtracks_subject():
         ),
         sex="F",
         birth_date=datetime(2022, 5, 1, 0, 0),
+        death_date=datetime(2022, 10, 14, 0, 0),
         species_name="mouse",
         cage_id=Decimal("-99999999999999.0000000000"),
         room_id=Decimal("-99999999999999.0000000000"),
@@ -72,6 +73,8 @@ def test_labtracks_subject():
         ),
         group_name="Exp-ND-01-001-2109",
         group_description="BALB/c",
+        protocol_number="2116",
+        protocol_title="Mouse Breeding",
     )
 
 
