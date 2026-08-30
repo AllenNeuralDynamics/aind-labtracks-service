@@ -13,7 +13,7 @@ class TestHandler:
         session_handler = SessionHandler(get_labtracks_session)
         assert session_handler is not None
 
-    def test_get_subject_value(
+    def test_get_subject_view(
         self, get_labtracks_session, test_labtracks_subject
     ):
         """Tests subject view is returned correctly."""
@@ -21,7 +21,17 @@ class TestHandler:
         subject = session_handler.get_subject_view(subject_id="632269")
         assert test_labtracks_subject == subject[0]
 
-    def test_get_task_value(self, get_labtracks_session, test_labtracks_task):
+    def test_get_subject_view_by_protocol(
+        self, get_labtracks_session, test_labtracks_subject
+    ):
+        """Tests subject view by protocol is returned correctly."""
+        session_handler = SessionHandler(get_labtracks_session)
+        subject = session_handler.get_subject_view_by_protocol(
+            protocol_number="2116"
+        )
+        assert test_labtracks_subject == subject[0]
+
+    def test_get_task_view(self, get_labtracks_session, test_labtracks_task):
         """Tests task view is returned correctly."""
         session_handler = SessionHandler(get_labtracks_session)
         tasks = session_handler.get_task_view(subject_id="632269")

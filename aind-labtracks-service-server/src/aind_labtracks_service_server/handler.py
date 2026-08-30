@@ -77,7 +77,65 @@ class SessionHandler:
             .outerjoin(gm, m.group_id == gm.id)
             .outerjoin(ap, ac.acuc_link_id == ap.link_index)
         )
-        results = self.session.execute(statement=statement).all()
+        results = self.session.exec(statement=statement).all()
+        subject_models = [Subject.model_validate(r) for r in results]
+        return subject_models
+
+    def get_subject_view_by_protocol(
+        self, protocol_number: Union[str, int]
+    ) -> List[Subject]:
+        """
+        Get a subject view from LabTracks by joining several tables.
+        Parameters
+        ----------
+        protocol_number : Union[str, int]
+          Protocol Number to pull mouse information about.
+
+        Returns
+        -------
+        List[Subject]
+          List of Subject models. If more than one row is returned, then this
+          is likely due to an error with data entry into LabTracks.
+
+        """
+        protocol_num = str(protocol_number)
+        ac = aliased(AnimalsCommon, name="ac")
+        p = aliased(AnimalsCommon, name="p")
+        m = aliased(AnimalsCommon, name="m")
+        g = aliased(Groups, name="g")
+        gm = aliased(Groups, name="gm")
+        s = aliased(Species, name="s")
+        ap = aliased(AcucProtocol, name="ap")
+        # PyCharm raises warnings about the usage of the .label method
+        # noinspection PyUnresolvedReferences
+        statement = (
+            select(
+                ac.id,
+                ac.class_values,
+                ac.sex,
+                ac.birth_date,
+                ac.death_date,
+                s.species_name,
+                ac.cage_id,
+                ac.room_id,
+                ac.paternal_index.label("paternal_id"),
+                p.class_values.label("paternal_class_values"),
+                ac.maternal_index.label("maternal_id"),
+                m.class_values.label("maternal_class_values"),
+                g.group_name,
+                gm.group_description.label("group_description"),
+                ap.protocol_number,
+                ap.protocol_title,
+            )
+            .where(ap.protocol_number == protocol_num)
+            .outerjoin(s, ac.species_id == s.id)
+            .outerjoin(p, ac.paternal_index == p.id)
+            .outerjoin(m, ac.maternal_index == m.id)
+            .outerjoin(g, ac.group_id == g.id)
+            .outerjoin(gm, m.group_id == gm.id)
+            .outerjoin(ap, ac.acuc_link_id == ap.link_index)
+        )
+        results = self.session.exec(statement=statement).all()
         subject_models = [Subject.model_validate(r) for r in results]
         return subject_models
 
@@ -121,6 +179,6 @@ class SessionHandler:
             .join(tt, ts.task_type_id == tt.id)
             .join(ap, ts.acuc_link_id == ap.link_index)
         )
-        results = self.session.execute(statement=statement).all()
+        results = self.session.exec(statement=statement).all()
         task_models = [Task.model_validate(r) for r in results]
         return task_models

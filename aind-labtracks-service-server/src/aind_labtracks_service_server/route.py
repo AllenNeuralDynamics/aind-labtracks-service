@@ -62,6 +62,33 @@ def get_subject(
 
 
 @router.get(
+    "/subject_by_protocol_number/{protocol_number}",
+    response_model=List[Subject],
+)
+def get_subject_by_protocol_number(
+    protocol_number: str = Path(
+        ...,
+        openapi_examples={
+            "default": {
+                "summary": "A protocol number",
+                "description": "Example protocol number to use.",
+                "value": "0401",
+            }
+        },
+    ),
+    session: Session = Depends(get_session),
+):
+    """
+    ## Subject metadata
+    Retrieves subject information from LabTracks.
+    """
+    lab_tracks_subjects = SessionHandler(
+        session=session
+    ).get_subject_view_by_protocol(protocol_number=protocol_number)
+    return lab_tracks_subjects
+
+
+@router.get(
     "/tasks/{subject_id}",
     response_model=List[Task],
 )

@@ -28,6 +28,14 @@ class TestSubjectRoute:
             test_labtracks_subject.model_dump(mode="json")
         ] == response.json()
 
+    def test_get_200_subject_by_protocol_number(
+        self, client, get_labtracks_session, test_labtracks_subject
+    ):
+        """Tests a good response"""
+        response = client.get("/subject_by_protocol_number/2116")
+        assert 200 == response.status_code
+        assert 3 == len(response.json())
+
     def test_500_internal_server_error(
         self, client, get_labtracks_session, caplog
     ):
