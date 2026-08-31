@@ -23,6 +23,7 @@ router = APIRouter()
     response_description="Return HTTP Status Code 200 (OK)",
     status_code=status.HTTP_200_OK,
     response_model=HealthCheck,
+    operation_id="get_health",
 )
 def get_health() -> HealthCheck:
     """
@@ -37,6 +38,7 @@ def get_health() -> HealthCheck:
 @router.get(
     "/subject/{subject_id}",
     response_model=List[Subject],
+    operation_id="get_subject",
 )
 def get_subject(
     subject_id: str = Path(
@@ -62,8 +64,35 @@ def get_subject(
 
 
 @router.get(
-    "/tasks/{subject_id}",
-    response_model=List[Task],
+    "/subject_by_protocol_number/{protocol_number}",
+    response_model=List[Subject],
+    operation_id="get_subject_by_protocol_number",
+)
+def get_subject_by_protocol_number(
+    protocol_number: str = Path(
+        ...,
+        openapi_examples={
+            "default": {
+                "summary": "A protocol number",
+                "description": "Example protocol number to use.",
+                "value": "0401",
+            }
+        },
+    ),
+    session: Session = Depends(get_session),
+):
+    """
+    ## Subject metadata
+    Retrieves subject information from LabTracks.
+    """
+    lab_tracks_subjects = SessionHandler(
+        session=session
+    ).get_subject_view_by_protocol(protocol_number=protocol_number)
+    return lab_tracks_subjects
+
+
+@router.get(
+    "/tasks/{subject_id}", response_model=List[Task], operation_id="get_tasks"
 )
 def get_tasks(
     subject_id: str = Path(

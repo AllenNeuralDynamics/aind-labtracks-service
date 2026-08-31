@@ -11,7 +11,7 @@ from fastapi.testclient import TestClient
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
 from sqlalchemy.orm import sessionmaker
-from sqlmodel import SQLModel, create_engine
+from sqlmodel import Session, SQLModel, create_engine
 
 from aind_labtracks_service_server.main import app
 from aind_labtracks_service_server.models import (
@@ -108,7 +108,7 @@ def get_labtracks_session():
     )
     SQLModel.metadata.create_all(engine)
     session_local = sessionmaker(
-        autocommit=False, autoflush=False, bind=engine
+        autocommit=False, autoflush=False, bind=engine, class_=Session
     )
     session = session_local()
     # Load sqlite db with test data
